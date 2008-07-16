@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Artisan - <%= controller.controller_name %>: <%= controller.action_name %></title>
+  <%= stylesheet_link_tag 'scaffold', 'will_paginate', 'tablesorter', 'screen' %>
+  <%= javascript_include_tag :defaults, 'jquery.tablesorter.js' %>
+</head>
+<body>
+<h1><%= link_to 'Artisan', root_path %></h1>
+
+<p style="color: green"><%= flash[:notice] %></p>
+
+<%= yield  %>
+
+<p><%= link_to 'home', root_path %></p>
+</body>
+</html>
+<%= yield :footer %>

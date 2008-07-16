@@ -1,0 +1,17 @@
+<h1>Listing videos</h1>
+
+<% for video in @videos %>
+  <%= video.iframe %>
+  <p>
+    <%= link_to 'Show', video %>
+    <%= link_to 'Edit', edit_video_path(video) %>
+    <%= link_to 'Destroy', video, :confirm => 'Are you sure?', :method => :delete %>
+    <%= link_to 'XML', video.xml_path %>
+    <%= link_to 'Chats', video_chats_path(video) %>
+    <%= link_to 'New art', new_video_art_path(video) %>
+  </p>
+<% end %>
+
+<br />
+
+<%= link_to 'New video', new_video_path %>

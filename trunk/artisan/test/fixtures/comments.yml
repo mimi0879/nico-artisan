@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  vpos: 1
+  command: MyString
+  text: MyString
+
+two:
+  vpos: 1
+  command: MyString
+  text: MyString

@@ -1,0 +1,33 @@
+<h1>New video</h1>
+
+<%= @video.iframe %>
+
+<% form_for(@video) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :vid %><br />
+    <%= f.text_field :vid %>
+  </p>
+  <p>
+    <%= f.label :url %><br />
+    <%= f.text_field :url, :size => 50 %>
+  </p>
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title, :size => 50 %>
+  </p>
+  <p>
+    <%= f.label :tags %><br />
+    <%= f.text_field :tags, :size => 50 %>
+  </p>
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', videos_path %>
+
+bookmarklet:
+<%= link_to 'artisan', %!javascript:window.location='http://#{request.host_with_port}/videos/new?title='+encodeURIComponent(document.title)+'&url='+encodeURIComponent(location.href);! %>
+

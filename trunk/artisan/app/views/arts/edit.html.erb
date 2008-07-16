@@ -1,0 +1,25 @@
+<h1>Editing art</h1>
+
+<% form_for(@art) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <%= f.label :vid %><br />
+    <%= f.text_field :vid %><br />
+    <%= @art.video.iframe if @art.video %>
+  </p>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= render :partial => 'comments' %>
+
+<%= link_to 'Show', @art %> |
+<%= link_to 'Back', arts_path %>

@@ -1,0 +1,49 @@
+<h1>New art</h1>
+
+<% form_for(@art) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <%= f.label :vid %><br />
+    <%= f.text_field :vid %><br />
+    <%= @video.iframe if @video %>
+  </p>
+
+  <% if @chats %>
+
+  <table class="tablesorter" id="table">
+  <thead>
+    <tr>
+      <th>Extract</th>
+      <th>Vpos</th>
+      <th>Mail</th>
+      <th>Text</th>
+      <th>User</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% for chat in @chats %>
+    <tr>
+      <td><%= check_box_tag 'i[]', chat.id, true, :class => 'check' %></td>
+      <td><%= link_to h(chat.vpos), search_video_chats_path(@video)+"?chat[vpos]="+h(chat.vpos) %></td>
+      <td><%= link_to h(chat.mail), search_video_chats_path(@video)+"?chat[mail]="+h(chat.mail) %></td>
+      <td><%=h chat.text %></td>
+      <td><%= link_to h(chat.user_id), search_video_chats_path(@video)+"?chat[user_id]="+h(chat.user_id) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+  </table>
+
+  <% end %>
+
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', arts_path %>

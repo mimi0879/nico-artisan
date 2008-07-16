@@ -1,0 +1,27 @@
+<h1>New history</h1>
+
+<% form_for(@history) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :video %><br />
+    <%= f.text_field :video %>
+  </p>
+  <p>
+    <%= f.label :art %><br />
+    <%= f.text_field :art %>
+  </p>
+  <p>
+    <%= f.label :comment %><br />
+    <%= f.text_field :comment %>
+  </p>
+  <p>
+    <%= f.label :xml %><br />
+    <%= f.text_field :xml %>
+  </p>
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', histories_path %>

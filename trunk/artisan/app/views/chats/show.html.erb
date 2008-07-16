@@ -1,0 +1,48 @@
+<p>
+  <b>Vpos:</b>
+  <%=h @chat.vpos %>
+</p>
+
+<p>
+  <b>Mail:</b>
+  <%=h @chat.mail %>
+</p>
+
+<p>
+  <b>Text:</b>
+  <%=h @chat.text %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%=h @chat.date %>
+</p>
+
+<p>
+  <b>No:</b>
+  <%=h @chat.no %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%=h @chat.user_id %>
+</p>
+
+<p>
+  <b>Premium:</b>
+  <%=h @chat.premium %>
+</p>
+
+<p>
+  <b>Anonymity:</b>
+  <%=h @chat.anonymity %>
+</p>
+
+<p>
+  <b>Thread:</b>
+  <%=h @chat.thread %>
+</p>
+
+
+<%= link_to 'Edit', edit_chat_path(@chat) %> |
+<%= link_to 'Back', chats_path %>

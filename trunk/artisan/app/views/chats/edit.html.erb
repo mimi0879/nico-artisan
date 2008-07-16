@@ -1,0 +1,48 @@
+<h1>Editing chat</h1>
+
+<% form_for(@chat) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :vpos %><br />
+    <%= f.text_field :vpos %>
+  </p>
+  <p>
+    <%= f.label :mail %><br />
+    <%= f.text_field :mail %>
+  </p>
+  <p>
+    <%= f.label :text %><br />
+    <%= f.text_field :text %>
+  </p>
+  <p>
+    <%= f.label :date %><br />
+    <%= f.datetime_select :date %>
+  </p>
+  <p>
+    <%= f.label :no %><br />
+    <%= f.text_field :no %>
+  </p>
+  <p>
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </p>
+  <p>
+    <%= f.label :premium %><br />
+    <%= f.check_box :premium %>
+  </p>
+  <p>
+    <%= f.label :anonymity %><br />
+    <%= f.check_box :anonymity %>
+  </p>
+  <p>
+    <%= f.label :thread %><br />
+    <%= f.text_field :thread %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @chat %> |
+<%= link_to 'Back', chats_path %>
