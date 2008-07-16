@@ -1,0 +1,50 @@
+<h2 onclick="$('#table_new').toggle()" style="text-decoration:underline;cursor:pointer">Add new comment</h2>
+<% form_for :comment, @new_comment, :url => art_comments_path(@art) do |f| %>
+<table class="tablesorter" id="table_new">
+<thead>
+  <tr>
+    <th>Time</th>
+    <th>Command</th>
+    <th>Text</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td><%= f.text_field :time %></td>
+    <td><%= f.text_field :command %></td>
+    <td><%= f.text_area :text, :cols => 30, :rows => 5 %></td>
+    <td><%= f.submit 'Add' %></td>
+  </tr>
+</tbody>
+</table>
+<% end %>
+
+<h2 onclick="$('#table').toggle()" style="text-decoration:underline;cursor:pointer">Edit comments</h2>
+
+<% unless @art.comments.blank? %>
+
+<table class="tablesorter" id="table">
+<thead>
+  <tr>
+    <th>ID</th>
+    <th>Time</th>
+    <th>Command</th>
+    <th>Text</th>
+  </tr>
+</thead>
+<tbody>
+<% for @comment in @art.comments %>
+  <tr>
+    <td><%=h @comment.id %></td>
+    <td><%= in_place_editor_field :comment, :time %></td>
+    <td><%= in_place_editor_field :comment, :command %></td>
+    <td><pre><%= in_place_editor_field :comment, :text, {}, {:field_type => 'textarea', :textarea_cols => 25, :textarea_rows => 10} %></pre></td>
+    <td><%= link_to 'Show', @comment %></td>
+    <td><%= link_to 'Edit', edit_comment_path(@comment) %></td>
+    <td><%= link_to 'Destroy', @comment, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+
+<% end %>

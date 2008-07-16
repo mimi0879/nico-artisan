@@ -1,0 +1,24 @@
+<h1>Editing comment</h1>
+
+<% form_for(@comment) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :vpos %><br />
+    <%= f.text_field :vpos %>
+  </p>
+  <p>
+    <%= f.label :command %><br />
+    <%= f.text_field :command %>
+  </p>
+  <p>
+    <%= f.label :text %><br />
+    <%= f.text_field :text %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @comment %> |
+<%= link_to 'Back', comments_path %>

@@ -1,0 +1,38 @@
+<%= @video.iframe %>
+
+<p>
+  <b>Vid:</b>
+  <%=h @video.vid %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%=h @video.url %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%=h @video.title %>
+</p>
+
+<p>
+  <b>Published at:</b>
+  <%=h @video.published_at %>
+</p>
+
+<p>
+  <b><%= link_to 'XML', @video.xml_path %></b> (<%= @video.xml_stat %>)
+</p>
+
+<p>
+  <b><%= link_to 'Chats', video_chats_path(@video) %></b> (<%= @video.chats.size %>)
+</p>
+
+<p>
+  <b><%= link_to_function 'Update Chats', "update_chats('#{video_chats_path(@video)}')" %></b>
+  <span id="update_load"></span>
+</p>
+
+
+<%= link_to 'Edit', edit_video_path(@video) %> |
+<%= link_to 'Back', videos_path %>

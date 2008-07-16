@@ -1,0 +1,23 @@
+<p>
+  <b>Video:</b>
+  <%=h @history.video %>
+</p>
+
+<p>
+  <b>Art:</b>
+  <%=h @history.art %>
+</p>
+
+<p>
+  <b>Comment:</b>
+  <%=h @history.comment %>
+</p>
+
+<p>
+  <b>Xml:</b>
+  <%=h @history.xml %>
+</p>
+
+
+<%= link_to 'Edit', edit_history_path(@history) %> |
+<%= link_to 'Back', histories_path %>

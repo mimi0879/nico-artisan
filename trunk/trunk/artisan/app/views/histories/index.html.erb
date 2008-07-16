@@ -1,0 +1,36 @@
+<h1>Listing histories</h1>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Video</th>
+    <th>Vpos</th>
+    <th>Art</th>
+    <th>Xml</th>
+    <th>Result</th>
+    <th>Created</th>
+  </tr>
+
+<%= will_paginate @histories %>
+
+<% for history in @histories %>
+  <tr>
+    <td><%=h history.id %></td>
+    <td><%=nicolink history.vid %></td>
+    <td><%=h history.vpos %></td>
+    <td><%=link_to h(history.art.title), art_path(history.art) %></td>
+    <td><%=h history.xml %></td>
+    <td><%=h history.result %></td>
+    <td><%=h history.created_at.to_s %></td>
+    <!--<td><%= link_to 'Show', history %></td>-->
+    <!--<td><%= link_to 'Edit', edit_history_path(history) %></td>-->
+    <!--<td><%= link_to 'Destroy', history, :confirm => 'Are you sure?', :method => :delete %></td>-->
+  </tr>
+<% end %>
+</table>
+
+<%= will_paginate @histories %>
+
+<br />
+
+<%= link_to 'New history', new_history_path %>

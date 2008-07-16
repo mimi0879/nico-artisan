@@ -1,0 +1,33 @@
+<% content_for :footer do %>
+  <script> set_tablesorter(); </script>
+<% end %>
+
+<p>
+  <b>Title:</b>
+  <%= in_place_editor_field :art, :title %>
+</p>
+
+<% if @art.video %>
+<p>
+  <b>Video:</b>
+  <%= @art.video.title %> (<%= in_place_editor_field :art, :vid %>)<br />
+  <%= @art.video.iframe %>
+</p>
+<% end %>
+
+<p>
+  <b><%= link_to_function "Memo:", "$('#memo').toggle()" %></b>
+  <pre id="memo" style="display:none"><%= in_place_editor_field :art, :memo, {}, {:field_type => 'textarea', :textarea_cols => 70, :textarea_rows => 20} %></pre>
+</p>
+
+<p>
+  post comments to:
+  vid:<%= text_field_tag :post_vid %> vpos:<%= text_field_tag :post_vpos %>
+  <%= link_to_function "post it!", "post_comments(#{@art.id})" %>
+  <span id="post_status" style="display:none">posting...</span>
+</p>
+
+<%= render :partial => 'comments' %>
+
+<%= link_to 'Edit', edit_art_path(@art) %> |
+<%= link_to 'Back', arts_path %>

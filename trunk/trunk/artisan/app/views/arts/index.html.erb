@@ -1,0 +1,20 @@
+<h1>Listing arts</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+  </tr>
+
+<% for @art in @arts %>
+  <tr>
+    <td><%= in_place_editor_field :art, :title %></td>
+    <td><%= link_to 'Show', @art %></td>
+    <td><%= link_to 'Edit', edit_art_path(@art) %></td>
+    <td><%= link_to 'Destroy', @art, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New art', new_art_path %>

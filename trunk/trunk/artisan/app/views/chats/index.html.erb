@@ -1,0 +1,89 @@
+<% content_for :footer do %>
+  <script> set_tablesorter(); </script>
+<% end %>
+
+<h1>Listing chats</h1>
+
+<% if @video %>
+  <%= @video.iframe %>
+
+  <p>
+    <%= link_to 'Show', @video %>
+    <%= link_to 'Edit', edit_video_path(@video) %>
+    <%= link_to 'Destroy', @video, :confirm => 'Are you sure?', :method => :delete %>
+    <%= link_to 'XML', @video.xml_path %>
+    <b><%= link_to_function 'Update Chats', "update_chats('#{video_chats_path(@video)}')" %></b>
+    <span id="update_load"></span>
+  </p>
+
+<% end %>
+
+<div>
+  <% form_for @chat, :url => search_video_chats_path(@video), :html => { :method => :get } do |f| %>
+    <%= f.text_field 'query' %>
+    <%= f.submit '検索' %>
+    <%= link_to_function '詳細検索', '$("#detail_search").toggle()', :style => 'font-size:80%' %>
+  <% end %>
+  <fieldset id="detail_search" style="display:none">
+    <legend>詳細検索</legend>
+    <% form_for @chat, :url => search_video_chats_path(@video), :html => { :method => :get } do |f| %>
+      <p>コメント: <%= f.text_field 'text' %></p>
+      <p>コマンド: <%= f.text_field 'mail' %></p>
+      <p>ユーザーID: <%= f.text_field 'user_id' %></p>
+      <p><%= f.submit '詳細検索' %></p>
+    <% end %>
+  </fieldset>
+</div>
+
+<p><%= @chats.total_entries %> chats
+<% if @chats.size < @chats.total_entries %>(<%= link_to_show_all(@chats) %>)<% end %>
+ | <%= link_to_function "extract selected chats to new art", '$("form#new_art").submit()' %></p>
+
+<%= will_paginate @chats %>
+
+<% form_tag new_art_path, :id => "new_art" do %>
+  <%= hidden_field_tag "video_id", @video.id if @video %>
+
+<table class="tablesorter" id="table">
+<thead>
+  <tr>
+    <th>Extract</th>
+    <th>Vpos</th>
+    <th>Mail</th>
+    <th>Text</th>
+    <th>User</th>
+    <!--<th>Date</th>-->
+    <!--<th>No</th>-->
+    <!--<th>Premium</th>-->
+    <!--<th>Anonymity</th>-->
+    <!--<th>Thread</th>-->
+  </tr>
+</thead>
+<tbody>
+<% for chat in @chats %>
+  <tr>
+    <td><%= check_box_tag 'i[]', chat.id, true, :class => 'check' %></td>
+    <td><%= link_to h(chat.vpos), search_video_chats_path(@video)+"?chat[vpos]="+h(chat.vpos) %></td>
+    <td><%= link_to h(chat.mail), search_video_chats_path(@video)+"?chat[mail]="+h(chat.mail) %></td>
+    <td><%=h chat.text %></td>
+    <td><%= link_to h(chat.user_id), search_video_chats_path(@video)+"?chat[user_id]="+h(chat.user_id) %></td>
+    <!--<td><%=h chat.date %></td>-->
+    <!--<td><%=h chat.no %></td>-->
+    <!--<td><%=h chat.premium %></td>-->
+    <!--<td><%=h chat.anonymity %></td>-->
+    <!--<td><%=h chat.thread %></td>-->
+    <td><%= link_to 'Show', chat %></td>
+    <td><%= link_to 'Edit', edit_chat_path(chat) %></td>
+    <td><%= link_to 'Destroy', chat, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+
+<% end %>
+
+<%= will_paginate @chats %>
+
+<br />
+
+<%= link_to 'New chat', new_chat_path %>
