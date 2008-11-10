@@ -16,10 +16,13 @@ module Nicovideo
 
       begin
         @params = get_params unless @params
+        @thumbinfo = thumbinfo unless @thumbinfo
+        comment_num = @thumbinfo.elements["comment_num"].text.to_i
+        block_no = (comment_num / 100).to_i
 
         # getpostkey
-        content = @agent.get_file(BASE_URL + "/api/getpostkey?thread=#{@params['thread_id']}&block_no=0")
-        @params.merge!(content.scan(/([^&]+)=([^&]*)/).inject({}){|h, v| h[v[0]] = v[1]; h})
+        content = @agent.get_file(BASE_URL + "/api/getpostkey?thread=#{@params['thread_id']}&block_no=#{block_no}")
+        @params.merge!(content.scan(/([^&=]+)=([^&]*)/).inject({}){|h, v| h[v[0]] = v[1]; h})
         raise "no postkey (#{content})" unless @params.key?('postkey')
 
         doc = REXML::Document.new self.comments(1).to_xml
@@ -27,10 +30,10 @@ module Nicovideo
         post_url = CGI.unescape(@params['ms'])
 
         vpos = case time
-               when /(\d+):(\d+\.\d+|\d+)/
+               when /(\d+):(\d+(?:\.\d+)?)/
                  ($1.to_i * 6000) + ($2.to_f * 100).to_i
-               when /(\d+\.\d+|\d+)/
-                 ($1.to_f * 100).to_i
+               when /\d+(?:\.\d+)?/
+                 ($&.to_f * 100).to_i
                end
 
         body = "<chat"+ {
@@ -56,6 +59,12 @@ module Nicovideo
         puts_info "result = " + result_xml
         [body, result_xml]
       end
+    end
+
+    def thumbinfo
+      content = @agent.get_file(BASE_URL + "/api/getthumbinfo/#{@video_id}")
+      doc = REXML::Document.new content
+      doc.elements["/nicovideo_thumb_response/thumb"]
     end
   end
 end

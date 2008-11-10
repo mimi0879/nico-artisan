@@ -1,4 +1,5 @@
 require 'rexml/document'
+require 'nicovideo-wayback-ext'
 class Video < ActiveRecord::Base
   include ActionView::Helpers::NumberHelper
   XML_ROOT = "#{RAILS_ROOT}/public/xml"
@@ -30,9 +31,9 @@ class Video < ActiveRecord::Base
     [trim_title, tags, published_at]
   end
 
-  def dl_chats(nv)
+  def dl_chats(nv, time=nil)
     nv.watch(vid) {|v|
-      xml = v.comments(1000).to_xml
+      xml = v.comments(1000, time).to_xml
       File.open(xml_fullpath, "wb") {|f| f.write xml }
     }
   end

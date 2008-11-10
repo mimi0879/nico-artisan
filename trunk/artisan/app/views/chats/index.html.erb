@@ -1,5 +1,8 @@
 <% content_for :footer do %>
-  <script> set_tablesorter(); </script>
+  <script>
+    set_tablesorter();
+    set_wayback();
+  </script>
 <% end %>
 
 <h1>Listing chats</h1>
@@ -14,7 +17,13 @@
     <%= link_to 'XML', @video.xml_path %>
     <b><%= link_to_function 'Update Chats', "update_chats('#{video_chats_path(@video)}')" %></b>
     <span id="update_load"></span>
+    <b><%= link_to_function 'Wayback', "$('#wayback').toggle()" %></b>
   </p>
+
+  <div id="wayback" style="">
+    Wayback: <%= text_field_tag "wayback_date", "", :size => 10 %>
+    <b><%= link_to_function 'Update Wayback Chats', "update_wayback_chats('#{video_chats_path(@video)}')" %></b>
+  </div>
 
 <% end %>
 

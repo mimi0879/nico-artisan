@@ -62,7 +62,8 @@ class ChatsController < ApplicationController
       @video = Video.find_by_id(params[:video_id])
       if @video
         size = @video.chats.size
-        @video.dl_chats(Account.nv)
+        @wayback_date = Date.parse(params[:wayback_date]).to_time if params[:wayback_date]
+        @video.dl_chats(Account.nv, @wayback_date)
         @video.extract_chats
         added_size = @video.chats(true).size - size
 

@@ -54,7 +54,7 @@ class Art < ActiveRecord::Base
           :xml => body,
           :result => result_xml
         )
-        sleep 3
+        sleep 10
       end
     end
   end
