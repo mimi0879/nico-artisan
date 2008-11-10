@@ -1,7 +1,13 @@
 // チャットデータ更新
-function update_chats(path) {
+function update_chats(path, data) {
+  if (data == null) data = {};
+  data["update"] = true;
   $("#update_load").html("updating...");
-  $("#update_load").load(path, {update:true});
+  $("#update_load").load(path, data);
+}
+function update_wayback_chats(path) {
+  var data = {"wayback_date":$("#wayback_date").val()};
+  update_chats(path, data);
 }
 // テーブルソートとチェックボックスをセットアップ
 function set_tablesorter() {
@@ -38,4 +44,7 @@ function post_comments(art_id) {
       $("#post_status").html(result);
     }
   });
+}
+function set_wayback() {
+  $("#wayback_date").datepicker();
 }

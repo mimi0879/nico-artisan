@@ -12,7 +12,7 @@ module Nicovideo
       begin
         @params = get_params unless @params
         thread_id = @params['thread_id']
-        body = %!<thread res_from="-#{num}" version="20061206" thread="#{thread_id}" />!
+        body = %!<thread res_from="-#{num}" version="20061206" thread="#{thread_id}"/>!
 
         if time
           # 過去ログ
@@ -23,11 +23,11 @@ module Nicovideo
           puts_debug content
           @params.merge!(content.scan(/([^&]+)=([^&]*)/).inject({}){|h, v| h[v[0]] = v[1]; h})
           raise ArgError, "no waybackkey: #{content}" unless @params.key?('waybackkey')
-          body.sub!(/( \/>)/, {
+          body.sub!(%r{(?=/>)}, {
             :user_id => @params['user_id'],
             :when => time.to_i,
             :waybackkey => @params['waybackkey']
-          }.map{|k,v| %! #{k}="#{v}"!}.join + ' />')
+          }.map{|k,v| %! #{k}="#{v}"!}.join)
         end
 
         puts_info "body : " + body
